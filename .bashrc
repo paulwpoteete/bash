@@ -69,7 +69,7 @@ var_ip=$(/sbin/ifconfig -a | grep inet | grep -Ev ":|127.0.0.1" | awk '{ printf 
 
 if [ $var_system -eq 1 ]; then
   #var_ram=$(free -h --si | grep Mem | awk '{ print $4 }')
-  var_ram=`free | awk '/Mem/{printf("%.0f%\n", $3/$2 * 100)}'`
+  var_ram=`free | awk '/Mem/{printf("%.0f%%\n", $3/$2 * 100)}'`
   var_cpu=`ps -eo %cpu | awk '{s+=$1} END {print int(s) "%"}'`
 
   PROMPT_COMMAND='if [ ${EUID} == 0 ]; then echo -en "$rn[OS:`uname -s` Login:$var_date FreeRAM:$var_ram $rb\0IP:$var_ip$rn]\e[0m\n"; else echo -en "$ub[OS:`uname -s`$un Term:$var_date CPU:$var_cpu RAM:$var_ram $ub\0IP:$var_ip$un]\e[0m\n"; fi'
